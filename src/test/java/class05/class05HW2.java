@@ -5,18 +5,25 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class Frames extends CommonMethods {
+public class class05HW2 extends CommonMethods {
+    // click on check box
+    //then select bay cat from drop down
+    //then enter text in text box
+
+
     public static void main(String[] args) throws InterruptedException {
         String url = "https://chercher.tech/practice/frames";
         String browser = "chrome";
         openBrowserAndLaunchApplication(url, browser);
 
-        // task 1: print animal on screen
-        // and select Baby cat from drop down
+        // click on check box
+        driver.switchTo().frame("frame1");
+        driver.switchTo().frame("frame3");
+        WebElement check = driver.findElement(By.xpath("//input[@id='a']"));
+        check.click();
+        Thread.sleep(2000);
 
-        //  step 1 : as the web element is inside an iframe
-        // first we need to switch to it
-
+        driver.switchTo().defaultContent();
         driver.switchTo().frame(1);
         // find the WebElement animal
         WebElement animal = driver.findElement(By.xpath("//b[text()='Animals :']"));
@@ -26,21 +33,12 @@ public class Frames extends CommonMethods {
         Select sel =new Select(dd);
         sel.selectByVisibleText("Baby Cat");
 
-        // switch the focus to main page
+        // enter text in text box
         driver.switchTo().defaultContent();
-
-        // switch to frame containing text box
         driver.switchTo().frame("frame1");
-
         WebElement textBox = driver.findElement(By.xpath("//input"));
-        textBox.sendKeys("abracadabra");
-
-        // click on the check box
-        // switch to iframe
-        WebElement frame3 = driver.findElement(By.xpath("//iframe[@id='frame3']"));
-        driver.switchTo().frame(frame3);
-
-        driver.findElement(By.id("a")).click();
+        textBox.sendKeys("Meow meow");
+        Thread.sleep(2000);
 
     }
 }
